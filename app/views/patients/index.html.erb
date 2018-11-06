@@ -1,1 +1,8 @@
-<h1> List all care centers </h1>
+<% @patients.each do |patient| %>
+  <div class="booyah-box">
+    <h1><%= patient.name %></h1><br />
+    <i><%= patient.skypeid %></i><br /><br />
+  </div>
+
+  <hr />
+<% end %>
