@@ -1,15 +1,22 @@
+
+
 <% @students.each do |student| %>
-  <div class="booyah-box">
+  <div>
     <h1><%= student.name %></h1><br />
     <i><%= student.skypeid %></i><br /><br />
     <p><%= student.grade %></p><br /><br />
-  </div>
+	<span class="skype-button rounded" data-contact-id="<%= student.skypeid %>"></span>
 
-  <hr />
+
+    
+
 <% end %>
+
 <div class="digg_pagination">
     <div class="page_info">
       <%= page_entries_info @posts %>
     </div>
     <%= will_paginate @students, :container => false %>
  </div>
+
+ <script src="https://swc.cdn.skype.com/sdk/v1/sdk.min.js"></script>
