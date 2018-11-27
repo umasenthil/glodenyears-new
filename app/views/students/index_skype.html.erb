@@ -5,7 +5,7 @@
     <h1><%= student.name %></h1><br />
     <i><%= student.skypeid %></i><br /><br />
     <p><%= student.grade %></p><br /><br />
-	<div class="g-hangout" data-render="createhangout"></div>
+	<span class="skype-button rounded" data-contact-id="<%= student.skypeid %>"></span>
 <% end %>
 
 <div class="digg_pagination">
@@ -15,4 +15,5 @@
     <%= will_paginate @students, :container => false %>
  </div>
 
-<script src="https://apis.google.com/js/platform.js" async defer></script>
+ <script src="https://swc.cdn.skype.com/sdk/v1/sdk.min.js">
+ </script>

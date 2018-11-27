@@ -1,19 +1,15 @@
-<script type="text/javascript" src="https://secure.skypeassets.com/i/scom/js/skype-uri.js"></script>
-
 <% @patients.each do |patient| %>
-  <div class="booyah-box">
+  <div>
     <h1><%= patient.name %></h1><br />
     <i><%= patient.skypeid %></i><br /><br />
-     <div id= <%= "SkypeButton_Call_"+patient.name %>>
-        <script type="text/javascript">
-          Skype.ui({
-                 "name": "call",
-                 "element": "<%= "SkypeButton_Call_"+patient.name %>",
-                 "participants": ["<%= patient.skypeid %>"]
-                });
-        </script>
-    </div>
-  </div>
-
-  <hr />
+	<div id="otEmbedContainer" style="width:800px; height:640px"></div>
 <% end %>
+
+<div class="digg_pagination">
+    <div class="page_info">
+      <%= page_entries_info @posts %>
+    </div>
+    <%= will_paginate @patients, :container => false %>
+ </div>
+                  
+<script src="https://tokbox.com/embed/embed/ot-embed.js?embedId=5d5d85bb-a2ad-41cf-b0fc-a6d8ebf4bae8&room=DEFAULT_ROOM"></script>

@@ -1,11 +1,9 @@
-
-
 <% @students.each do |student| %>
   <div>
     <h1><%= student.name %></h1><br />
     <i><%= student.skypeid %></i><br /><br />
     <p><%= student.grade %></p><br /><br />
-	<div class="g-hangout" data-render="createhangout"></div>
+	<div id="otEmbedContainer" style="width:800px; height:640px"></div>
 <% end %>
 
 <div class="digg_pagination">
@@ -14,5 +12,5 @@
     </div>
     <%= will_paginate @students, :container => false %>
  </div>
-
-<script src="https://apis.google.com/js/platform.js" async defer></script>
+                  
+<script src="https://tokbox.com/embed/embed/ot-embed.js?embedId=5d5d85bb-a2ad-41cf-b0fc-a6d8ebf4bae8&room=DEFAULT_ROOM"></script>

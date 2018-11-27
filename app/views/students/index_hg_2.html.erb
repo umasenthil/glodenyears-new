@@ -1,11 +1,12 @@
 
-
 <% @students.each do |student| %>
   <div>
     <h1><%= student.name %></h1><br />
     <i><%= student.skypeid %></i><br /><br />
     <p><%= student.grade %></p><br /><br />
-	<div class="g-hangout" data-render="createhangout"></div>
+	<g:hangout render="createhangout"
+        invites="[{ id : 'manjari.infinite@gmail.com', invite_type : 'EMAIL' }]">
+    </g:hangout>
 <% end %>
 
 <div class="digg_pagination">

@@ -1,0 +1,19 @@
+<script type="text/javascript" src="https://secure.skypeassets.com/i/scom/js/skype-uri.js"></script>
+
+<% @patients.each do |patient| %>
+  <div class="booyah-box">
+    <h1><%= patient.name %></h1><br />
+    <i><%= patient.skypeid %></i><br /><br />
+     <div id= <%= "SkypeButton_Call_"+patient.name %>>
+        <script type="text/javascript">
+          Skype.ui({
+                 "name": "call",
+                 "element": "<%= "SkypeButton_Call_"+patient.name %>",
+                 "participants": ["<%= patient.skypeid %>"]
+                });
+        </script>
+    </div>
+  </div>
+
+  <hr />
+<% end %>
