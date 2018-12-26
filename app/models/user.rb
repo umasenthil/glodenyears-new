@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :email
   has_one :student
   has_one :patient
+  has_one :room
   
   def self.authenticate(email, password)
     user = find_by_email(email)
