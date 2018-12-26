@@ -5,7 +5,6 @@ class UsersController < ApplicationController
 
     def create
 	  @user = User.new(params.require(:user).permit!)
-	  binding.pry
 	  if @user.save
 	    session[:user_id] = @user.id
 		Rails.logger.debug("My object: #{@user.inspect}")

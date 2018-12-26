@@ -8,7 +8,6 @@ class PatientsController < ApplicationController
 	end
 
     def create
-      binding.pry
   	  current_user.create_patient(patient_params)
   	  redirect_to static_pages_home_path
     end

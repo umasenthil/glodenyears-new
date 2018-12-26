@@ -8,7 +8,6 @@ class StudentsController < ApplicationController
 	end
 
     def create
-      binding.pry
   	  current_user.create_student(student_params)
   	  redirect_to new_room_path
     end
