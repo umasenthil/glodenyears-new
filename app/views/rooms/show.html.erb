@@ -3,6 +3,7 @@
     var sessionId = '<%= @room.session_id %>';
     var token = '<%= @token %>';
 </script>
+
 <button class="btn btn-primary" onclick="disconnectSession()">Disconnect</button>
 <div id="videos" class="row">
     <div class="col-md-4">
@@ -15,7 +16,9 @@
             <div id="subscriber" class="embed-responsive-item"></div>
         </div>
     </div>
+
 </div>
+<input type="text" id="connectionCountField" value="0"></input>
 
 <script>
 // Handling all of our errors here by alerting them
@@ -76,6 +79,20 @@ function initializeSession() {
       session.publish(publisher, handleError);
     }
   });
+
+  session.on("connectionCreated", function(event) {
+      connectionCount++;
+      displayConnectionCount();
+  });
+
+  session.on("connectionDestroyed", function(event){
+      connectionCount--;
+      displayConnectionCount();
+  });
+}
+
+function displayConnectionCount(){
+    document.getElementById("connectionCountField").value = connectionCount.toString();
 }
 </script>
 
