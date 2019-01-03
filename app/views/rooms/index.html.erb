@@ -1,16 +1,22 @@
 <fieldset>
-  <legend>Existing Conference</legend>
-  <table cellpadding="2" cellspacing="5">
-    <tr>
-      <th>Name</th>
-      <th>Started</th>
-    </tr>
-
-    <% @rooms.each do |room| %>
-      <tr>
-        <td align="center" width="300px"><%= link_to room.name, room_path(room) %> </td>
-        <td><%= room.created_at %></td>
-      </tr>
-    <% end %>
+  <table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Started</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @rooms.each do |room| %>
+          <tr>
+            <td>
+                <div class="btn btn-primary">
+                    <%= link_to room.name, room_path(room) %>
+                </div>
+            </td>
+            <td><%= room.created_at %></td>
+          </tr>
+        <% end %>
+    </tbody>
   </table>
 </fieldset>

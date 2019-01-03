@@ -31,11 +31,23 @@ body, html {
 }
 
 .navbar-inverse .navbar-brand {
-  color: #E3E85A;
-  font-family: 'chunkfiveroman', sans-serif;
+  color: #D9C3BE;
+  font-family: 'Papyrus', sans-serif;
   font-size:26px;
 }
 
+.navbar-inverse .navbar-nav .open > .nav-link, .navbar-inverse .navbar-nav .active > .nav-link, .navbar-inverse .navbar-nav .nav-link.open, .navbar-inverse .navbar-nav .nav-link.active{
+    color: #D6cFCB;
+}
+
+.navbar-inverse .navbar-nav .nav-link {
+    color: #D6cFCB;
+}
+
+a {
+    color: #7E7E53;
+    text-decoration: none;
+}
 .digg_pagination {
   background: white;
   cursor: default;
@@ -79,3 +91,21 @@ body, html {
       background: #6aa6ed;
       padding: 0.1em 0.25em; 
   }
+
+  .btn-primary {
+  background-color: #d6cfcb !important;
+  border-color: #15548b !important;
+  color: #CCB7AE;
+}
+
+.btn-primary:hover {
+  background-color: #4289c6 !important;
+  border-color: #3877ae !important;
+  color: #fff;
+}
+
+.btn-primary.focus, .btn-primary:focus {
+   background-color: #4289c6 !important;
+   border-color: #3877ae !important;
+   color: #fff;
+}
