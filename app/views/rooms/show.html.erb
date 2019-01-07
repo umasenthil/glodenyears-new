@@ -2,9 +2,11 @@
     var apiKey = '<%= @api_key %>';
     var sessionId = '<%= @room.session_id %>';
     var token = '<%= @token %>';
+    var room = '<%= @room %>';
 </script>
 
 <button class="btn btn-primary" onclick="disconnectSession()">Disconnect</button>
+
 <div id="videos" class="row">
     <div class="col-md-4">
         <div class="embed-responsive embed-responsive-16by9">
@@ -18,81 +20,102 @@
     </div>
 
 </div>
+
 <input type="text" id="connectionCountField" value="0"></input>
-
+<input type="hidden" name="_method" value="put" />
 <script>
-// Handling all of our errors here by alerting them
-function handleError(error) {
-  if (error) {
-    alert(error.message);
-  }
-}
-var session;
-var connection_id;
-
-initializeSession();
-
-function disconnectSession() {
-    session.disconnect();
-}
-
-function initializeSession() {
-  session = OT.initSession(apiKey, sessionId);
-
-  // Subscribe to a newly created stream
-  session.on('streamCreated', function(event) {
-    console.log("session on")
-    var subscriberContainer = document.getElementById('subscriber');
-    session.subscribe(event.stream, subscriberContainer, {
-      insertMode: 'append',
-      width: '100%',
-      height: '100%'
-    }, handleError);
-  });
-
-  // Subscribe to a newly created stream
-  session.on('connectionCreated', function(event) {
-    connection_id = event.connection.id;
-    console.log("connection Created", event.connection.id)
-    console.log("session ID", event.target.sessionId, sessionId)
-  });
-
-  // Disconnect
-  session.on('sessionDisconnected', function(event) {
-    window.location.replace('<%= rooms_path %>');
-  });
-
-  // Create a publisher
-  var publisher = OT.initPublisher('publisher', {
-    insertMode: 'append',
-    width: '100%',
-    height: '100%'
-  }, handleError);
-
-  // Connect to the session
-  session.connect(token, function(error) {
-    // If the connection is successful, publish to the session
-    console.log("session connected")
-    if (error) {
-      handleError(error);
-    } else {
-      session.publish(publisher, handleError);
+    // Handling all of our errors here by alerting them
+    function handleError(error) {
+      if (error) {
+        alert(error.message);
+      }
     }
-  });
+    var session;
+    var connection_id;
+    var connectionCount;
+    var room_id = <%= @room.id %>
+    console.log("room id: ", room_id)
 
-  session.on("connectionCreated", function(event) {
-      connectionCount++;
-      displayConnectionCount();
-  });
+    initializeSession();
 
-  session.on("connectionDestroyed", function(event){
-      connectionCount--;
-      displayConnectionCount();
-  });
-}
+    function disconnectSession() {
+        session.disconnect();
+    }
 
-function displayConnectionCount(){
-    document.getElementById("connectionCountField").value = connectionCount.toString();
-}
+    function initializeSession() {
+      session = OT.initSession(apiKey, sessionId);
+
+      // Subscribe to a newly created stream
+      session.on('streamCreated', function(event) {
+        console.log("session on")
+        var subscriberContainer = document.getElementById('subscriber');
+        session.subscribe(event.stream, subscriberContainer, {
+          insertMode: 'append',
+          width: '100%',
+          height: '100%'
+        }, handleError);
+      });
+
+      // Create a publisher
+      var publisher = OT.initPublisher('publisher', {
+        insertMode: 'append',
+        width: '100%',
+        height: '100%'
+      }, handleError);
+
+      // Connect to the session
+      session.connect(token, function(error) {
+          // If the connection is successful, publish to the session
+          console.log("session connected")
+          if (error) {
+            handleError(error);
+          } else {
+            session.publish(publisher, handleError);
+          }
+      });
+
+      session.on("connectionCreated", function(event) {
+          console.log("connectionCreated");
+           $.ajax({
+                    type: "PUT",
+                    data: JSON.stringify({ room: {connected: true}, _method:'put' }),
+                    url: "/rooms/" + room_id + "/connected",
+                    contentType: 'application/json'
+                  }).done(function( msg ){
+                    alert( "Data Saved: " + msg );
+           });
+       });
+
+      // Disconnect
+      session.on('sessionDisconnected', function(event) {
+        console.log("session Disconnected")
+        $.ajax({
+                type: "PUT",
+                data: JSON.stringify({ room: {connected: false}, _method:'put' }),
+                url: "/rooms/" + room_id + "/connected",
+                contentType: 'application/json'
+                }).done(function( msg ){
+                    window.location.replace('<%= rooms_path %>');
+                    alert( "Data Saved: " + msg );
+           });
+
+      });
+
+      session.on("connectionDestroyed", function(event){
+          console.log("connectionDestroyed");
+           $.ajax({
+                    type: "PUT",
+                    data: JSON.stringify({ room: {connected: false}, _method:'put' }),
+                    url: "/rooms/" + room_id + "/connected",
+                    contentType: 'application/json'
+                  }).done(function( msg ){
+                    alert( "Data Saved: " + msg );
+           });
+      });
+    }
+
+    function displayConnectionCount(){
+        document.getElementById("connectionCountField").value = connectionCount.toString();
+    }
 </script>
 

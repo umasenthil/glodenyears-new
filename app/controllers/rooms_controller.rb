@@ -1,5 +1,7 @@
 class RoomsController < ApplicationController
 	require "opentok"
+	$session
+
 	def index
 		@rooms = Room.order("created_at DESC")
 		@new_room = Room.new()
@@ -25,6 +27,17 @@ class RoomsController < ApplicationController
 		opentok = OpenTok::OpenTok.new(ENV["API_KEY"], ENV["API_SECRET"])
 		@room = Room.find(params[:id])
 		@token = opentok.generate_token(@room.session_id)
+	end
+
+	def show_active
+        @session = session
+	end
+
+	def connected
+	    binding.pry
+	    @room = Room.find params[:room_id]
+	    binding.pry
+	    @room.update_attributes(:connected => params[:room][:connected])
 	end
 
     private
