@@ -1,1 +1,16 @@
-Say <%= @session %>
+<fieldset>
+  <legend>Existing Conference</legend>
+  <table cellpadding="2" cellspacing="5">
+    <tr>
+      <th>Name</th>
+      <th>Started</th>
+    </tr>
+
+    <% @active_rooms.each do |room| %>
+      <tr>
+        <td align="center" width="300px"><%= link_to room.name, room_path(room) %> </td>
+        <td><%= room.created_at %></td>
+      </tr>
+    <% end %>
+  </table>
+</fieldset>

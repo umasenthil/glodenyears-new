@@ -30,7 +30,8 @@ class RoomsController < ApplicationController
 	end
 
 	def show_active
-        @session = session
+	    binding.pry
+        @active_rooms = Room.where(connected: true)
 	end
 
 	def connected
