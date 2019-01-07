@@ -1,2 +1,13 @@
-<h1>StaticPages#home</h1>
-<p>Find me in app/views/static_pages/home.html.erb</p>
+<h1> Walk through Video with steps to use this site</h1>
+<div class="booyah-box">
+      <% if current_user %>
+    	Logged in as <%= current_user.email %>.
+        <%= link_to "Connect Now", rooms_path %>
+      <% else %>
+    	<%= link_to "Sign up", sign_up_path %> or
+    	<%= link_to "log in", log_in_path %>
+  	  <% end %>
+</div>
+<p> Slideshow for dementia care and prevention tips </p>
+
+

@@ -1,0 +1,25 @@
+// Place all the styles related to the rooms controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+body, html {
+    background-color: gray;
+}
+
+#subscriber {
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    border: 3px solid white;
+    border-radius: 3px;
+    padding: 0;
+}
+
+#publisher {
+    width: 100%;
+    height: auto;
+    z-index: 100;
+    border: 3px solid white;
+    border-radius: 3px;
+    padding: 0;
+}

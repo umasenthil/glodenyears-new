@@ -8,13 +8,15 @@ class StudentsController < ApplicationController
 	end
 
     def create
-      binding.pry
   	  current_user.create_student(student_params)
-  	  redirect_to static_pages_home_path
+  	  redirect_to new_room_path
     end
 
     private
     def student_params
       params.require(:student).permit(:name, :skypeid, :grade)
+    end
+    def room_params
+      params.require(:room).permit(:id, :name, :session_id)
     end
 end

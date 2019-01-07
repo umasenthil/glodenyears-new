@@ -1,0 +1,10 @@
+<h1>Rooms#index</h1>
+<div id="newRoom">
+  <fieldset>
+    <legend>Start a new party room</legend>
+    <%= form_for Room.new do |f| %>
+      Room Name: <%= f.text_field :name %><br/><br/>
+      <%= f.submit %>
+    <% end %>
+  </fieldset>
+</div>
