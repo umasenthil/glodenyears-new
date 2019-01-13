@@ -14,7 +14,7 @@ class StudentsController < ApplicationController
 
     private
     def student_params
-      params.require(:student).permit(:name, :skypeid, :grade)
+      params.require(:student).permit(:name, :grade)
     end
     def room_params
       params.require(:room).permit(:id, :name, :session_id)

@@ -3,13 +3,7 @@
 <% @students.each do |student| %>
   <div>
     <h1><%= student.name %></h1><br />
-    <i><%= student.skypeid %></i><br /><br />
     <p><%= student.grade %></p><br /><br />
-	<span class="skype-button rounded" data-contact-id="<%= student.skypeid %>"></span>
-
-
-    
-
 <% end %>
 
 <div class="digg_pagination">
@@ -18,5 +12,3 @@
     </div>
     <%= will_paginate @students, :container => false %>
  </div>
-
- <script src="https://swc.cdn.skype.com/sdk/v1/sdk.min.js"></script>
