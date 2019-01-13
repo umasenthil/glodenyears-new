@@ -30,14 +30,11 @@ class RoomsController < ApplicationController
 	end
 
 	def show_active
-	    binding.pry
         @active_rooms = Room.where(connected: true)
 	end
 
 	def connected
-	    binding.pry
 	    @room = Room.find params[:room_id]
-	    binding.pry
 	    @room.update_attributes(:connected => params[:room][:connected])
 	end
 
