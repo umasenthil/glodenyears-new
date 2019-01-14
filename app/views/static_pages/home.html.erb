@@ -2,7 +2,10 @@
 <div class="booyah-box">
       <% if current_user %>
     	Logged in as <%= current_user.email %>.
-        <%= link_to "Connect Now", rooms_path %>
+        <%= link_to_if current_user.isstudent, "Connect Now",  rooms_path do
+          link_to "Connect Now", rooms_show_active_path
+        end 
+        %>
       <% else %>
     	<%= link_to "log in", log_in_path %>
   	  <% end %>
