@@ -19,23 +19,23 @@
       <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
         <ul class="navbar-nav mr-auto mt-2 mt-md-0">
           <li class="nav-item active">
-            <a class="nav-link" href="static_pages/home">Home</a>
+            <a class="nav-link" href="/static_pages/home">Home</a>
+          </li>
+          <li class="nav-item">
+            <% if current_user %>
+                <a class="nav-link" href="/log_out"> <%= current_user.email %> Logout</a>
+            <% else %>
+                <a class="nav-link" href="/log_in">Login</a>
+  	        <% end %>
           </li>
         </ul>
       </div>
     </nav>
-    <div id="user_nav">
-      <% if current_user %>
-    	Logged in as <%= current_user.email %>.
-        <%= link_to "Log out", log_out_path %>
-      <% else %>
-    	  <%= link_to "log in", log_in_path %>
-  	  <% end %>
-    </div>
 
-<% flash.each do |name, msg| %>
-  <%= content_tag :div, msg, :id => "flash_#{name}" %>
-<% end %>
+    <% flash.each do |name, msg| %>
+        <%= content_tag :div, msg, :id => "flash_#{name}" %>
+    <% end %>
+
     <%= yield %>
   </body>
 </html>

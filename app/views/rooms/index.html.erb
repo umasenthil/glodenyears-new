@@ -1,20 +1,18 @@
 <fieldset>
   <table class="table">
-    <thead>
+    <thead  >
         <tr>
-            <th scope="col">Name</th>
-            <th scope="col">Started</th>
+            <th class="text-center">Click Button</th>
         </tr>
     </thead>
     <tbody>
         <% @rooms.each do |room| %>
           <tr>
-            <td>
+            <td align="center">
                 <div class="btn btn-primary">
                     <%= link_to room.name, room_path(room) %>
                 </div>
             </td>
-            <td><%= room.created_at %></td>
           </tr>
         <% end %>
     </tbody>

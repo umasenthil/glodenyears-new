@@ -26,8 +26,16 @@ body, html {
   background-size: cover;
 }
 
-.navbar {
-  box-shadow: 0px 1px 3px #2a2a2a;
+.navbar .container-fluid>.navbar-header {
+  float: left;
+  margin-right: 10px;
+}
+.navbar .navbar-nav {
+  float: left;
+  margin: 5px;
+}
+.nav li {
+  display: inline-block;
 }
 
 .navbar-inverse .navbar-brand {
